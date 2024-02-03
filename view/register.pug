@@ -1,0 +1,79 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Register - Sports Management System
+  style.
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    }
+    form {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+    display: block;
+    margin-bottom: 0.5em;
+    }
+    input {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    }
+    select {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    }
+    button {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+  script.
+    function redirectToDashboard() {
+    // Redirect to the fan dashboard after successful registration
+    window.location.href = 'sports.html';
+    }
+form
+  .container
+    h2 Registration
+    form(action='register.php' method='post')
+      label(for='fullname') fullname:
+      input#fullname(type='text' name='fullname' required='')
+      label(for='username') Username:
+      input#username(type='text' name='username' required='')
+      label(for='password') Password:
+      input#password(type='password' name='password' required='')
+      button(type='submit') Register
+      p
+        | Already have an account? 
+        a(href='login.html') Login
+        | .
+// Additional JavaScript for role-specific redirects (optional)
+script.
+  function performRegistration() {
+  // You can add actual rregistration logic here
+  // For simplicity, let's just display an alert
+  alert('Registration successful! Redirect to login...');
+  // You may want to redirect the user to the login page or another page
+  }
+//
+  <label for="role">Role:</label>
+  <select id="role" name="role" required>
+  <option value="fan">Fan</option>
+  <option value="coach">Coach</option>
+  <option value="player">Player</option>
+  </select>

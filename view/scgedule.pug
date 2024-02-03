@@ -1,0 +1,86 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Match Schedule
+  style.
+    body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    }
+    header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    }
+    main {
+    padding: 2em;
+    text-align: center;
+    }
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    }
+    th,
+    td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    }
+    th {
+    background-color: #333;
+    color: #fff;
+    }
+header
+  h1 Match Schedule
+main
+  h2 Football Schedule
+  table#footballTable
+    thead
+      tr
+        th Date
+        th Time
+        th Type of Game
+        th Teams
+        th Venue
+    tbody
+      // Data will be dynamically loaded here using JavaScript
+  h2 Basketball Schedule
+  table#basketballTable
+    thead
+      tr
+        th Date
+        th Time
+        th Type of Game
+        th Teams
+        th Venue
+    tbody
+      // Data will be dynamically loaded here using JavaScript
+  script.
+    // Function to fetch and display schedule data for a given game type
+    function fetchScheduleData(gameType, tableId) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    var data = JSON.parse(this.responseText);
+    var tableBody = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+    // Clear existing rows
+    tableBody.innerHTML = "";
+    // Add new rows based on fetched data
+    data.forEach(function (row) {
+    var newRow = "<tr><td>" + row.date + "</td><td>" + row.time + "</td><td>" + row.game_type + "</td><td>" + row.teams + "</td><td>" + row.venue + "</td></tr>";
+    tableBody.innerHTML += newRow;
+    });
+    }
+    };
+    xhttp.open("GET", "fetch_schedule.php?game_type=" + gameType, true);
+    xhttp.send();
+    }
+    // Fetch and display football schedule
+    fetchScheduleData('Football', 'footballTable');
+    // Fetch and display basketball schedule
+    fetchScheduleData('Basketball', 'basketballTable');
